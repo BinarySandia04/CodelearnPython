@@ -118,8 +118,46 @@ def acceptUser(userDictionary):
     print("=============================")
 
     return userDictionary
+
+def saveFile(userDict):
     
+    f = open("data.txt", "w")
+    for key in userDict:
+        s = key + " "
+        for i in range(0, 6):
+            s += userDict[key][i] + " "
+        for i in userDict[key][7]:
+            s += i + " "
+        s += '\n'
+        f.write(s)
+    f.close()
+    
+def readFile():
+    userDictionary = {}
+    try:
+        with open("data.txt", "r") as f:
+            for s in f.readlines():
+                r = s.split()
+                print(len(r))
+                userDictionary[r[0]] = []
+                userDictionary[r[0]].append(r[0])
+                userDictionary[r[0]].append(r[1])
+                userDictionary[r[0]].append(r[2])
+                userDictionary[r[0]].append(r[3])
+                userDictionary[r[0]].append(r[4])
+                userDictionary[r[0]].append(r[5])
+                userDictionary[r[0]].append([])                    
+                if len(r) > 6:
+                    for e in range(6, len(r)-1):
+                        print("Wat")
+                        userDictionary[r[0]][6].append(r[e])
+        return userDictionary
+    except IOError:
+        print("Problema")
 
 userDictionary = newUser(userDictionary)
 userDictionary = newUser(userDictionary)
 userDictionary = acceptUser(userDictionary)
+print(userDictionary)
+saveFile(userDictionary)
+print(readFile())
