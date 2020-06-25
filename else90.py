@@ -23,8 +23,8 @@ def decrypt_cesar(s, n, alphabet):
         res += alphabet[old_pos(alphabet.index(c), n, len(alphabet))]
     return res
 
-def new_alphabet(l, p):
-    alpha = alphabet_list()
+def new_alphabet(alp, p):
+    alpha = list(alp) # PUTO PYTHON OSTIAAAAAA AIXO ES MOLT LLEIG
     result = []
     if p == "" or len(p) > len(alpha):
         return alpha
@@ -40,5 +40,48 @@ def new_alphabet(l, p):
             result.append(alpha[thein])
         return result
 
+def encrypt_monoalfabetic(s, kw, alphabet):
+    newalpha = new_alphabet(alphabet, kw)
+    result = ""
+    for c in s:
+        result += newalpha[alphabet.index(c)]
+    return result
 
-print(new_alphabet("wtf", "epsilon")  )
+def decrypt_monoalfabetic(s, kw, alphabet):
+    newalpha = new_alphabet(alphabet, kw)
+    result = ""
+    for c in s:
+        result += alphabet[newalpha.index(c)]
+    return result
+    # M'HA COSTAT LA VIDA DIOOOOOOS
+
+def displaced_alphabet(alphabet, i):
+    return alphabet[i:] + alphabet[:i] # Bastant facil
+
+def create_displaced_alphabet_list(alphabet):
+    r = []
+    for i in range(len(alphabet)):
+        r.append(displaced_alphabet(alphabet, i))
+    return r
+    # Casi em moro aixo es molt molt molt dificil
+
+def create_dictionary(l1, l2):
+    dic = {}
+
+    #Ambdues son de la mateixa longitud?
+    if(len(l1) != len(l2)):
+        return
+
+    for i in range(len(l1)):
+        dic[l1[i]] = l2[i]
+    return dic
+
+    # M'he tirat anys per fer aixo
+
+def create_encrypt_alphabets_dictionary(l1, l2):
+    dic = {}
+    for i in range(len(l1)):
+        dic[l1[i]] = create_dictionary(l1, l2[i])
+    return dic
+
+    # He estat més temps escribint el nom de la funcio xDDDD
