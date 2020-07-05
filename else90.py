@@ -76,7 +76,7 @@ def create_dictionary(l1, l2):
         dic[l1[i]] = l2[i]
     return dic
 
-    # M'he tirat anys per fer aixo
+    # M'he tirat anys per fer aixo  
 
 def create_encrypt_alphabets_dictionary(l1, l2):
     dic = {}
@@ -84,4 +84,35 @@ def create_encrypt_alphabets_dictionary(l1, l2):
         dic[l1[i]] = create_dictionary(l1, l2[i])
     return dic
 
-    # He estat més temps escribint el nom de la funcio xDDDD
+
+def create_decrypt_alphabets_dictionary(l1, l2):
+    dic = {}
+    for i in range(len(l1)):
+        dic[l1[i]] = create_dictionary(l2[i], l1)
+    return dic
+
+def encrypt_polialphabetic(s, kw, alphabet):
+    alphlist = create_displaced_alphabet_list(alphabet)
+    dictio = create_encrypt_alphabets_dictionary(alphabet, alphlist)
+    
+    res = ""
+
+    for i in range(len(s)):
+        res += dictio[s[i]][kw[i % len(kw)]]
+    
+    return res
+
+def decrypt_polialphabetic(s, kw, alphabet):
+    alphlist = create_displaced_alphabet_list(alphabet)
+    dictio = create_decrypt_alphabets_dictionary(alphabet, alphlist)
+    
+    res = ""
+
+    for i in range(len(s)):
+        res += dictio[s[i]][kw[i % len(kw)]]
+    
+    return res
+
+l = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+print(decrypt_polialphabetic("abc", "cab", l))
+print(decrypt_polialphabetic("czz", "cab", l))
