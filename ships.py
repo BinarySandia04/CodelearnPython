@@ -1,4 +1,4 @@
-# (C) Aran Roig, 2020, BrunoMoya corporeishon
+# (C) Aran Roig, 2020
 import string
 import time
 
